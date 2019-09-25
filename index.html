@@ -109,8 +109,8 @@
                 });
             }
             else {
-                //TODO:: REPLACE [chicagoStartups.reverse()] WITH A FUNCTION CALLED "chicagoStartupsReverse"
-                chicagoStartups.reverse().forEach( function(startup) {
+                //DONE - TODO:: REPLACE [chicagoStartups.reverse()] WITH A FUNCTION CALLED "chicagoStartupsReverse" - DONE
+                chicagoStartupsReverse().forEach( function(startup) {
                     var childDiv = document.createElement('div');
                     var text = document.createTextNode(startup);
                     childDiv.appendChild(text);
@@ -122,10 +122,14 @@
 
     function chicagoStartupsReverse() {
         var reversedStartups = [];
-        // Gonna work this first
+
+        for (var i = chicagoStartups.length - 1; i >= 0; i--) {
+            reversedStartups.push(chicagoStartups[i]);
+        }
+        // Gonna work this first - DONE
         /*
-            TODO: REVERSE THE CONTENTS OF THE ARRAY WITHOUT USING THE BUILT IN REVERSE METHOD
-                  RETURN THE REVERSED ARRAY
+            DONE - TODO: REVERSE THE CONTENTS OF THE ARRAY WITHOUT USING THE BUILT IN REVERSE METHOD
+                  RETURN THE REVERSED ARRAY - DONE
 
             TIPS: 
                 1.  REVIEW JAVASCRIPT ARRAY DATA STRUCTURE AND THE BUILTIN METHODS PROVIDED TO ALL ARRAYS
