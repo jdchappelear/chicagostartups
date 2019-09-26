@@ -66,6 +66,9 @@
         'Shiftgig',
         'ParkWhiz'
     ];
+    var elementType = 'div'; // default for vertical mode
+    var spacer = ''; // didn't have time to implement
+    var toggleDisplayClicked = 'false'; // didn't have time to implement
 
     function clearDocument() {
         var rootDiv = document.getElementById('rootContainer');
@@ -102,7 +105,7 @@
                 }
                 reversedChicagoStartups.forEach(function(chicagoStartup, index) {
                     console.log(chicagoStartup);
-                    var childDiv = document.createElement('div');
+                    var childDiv = document.createElement(elementType); // Determined by horizontal or vertical mode
                     var text = document.createTextNode(chicagoStartup);
                     childDiv.appendChild(text);
                     reverseContainer.appendChild(childDiv);
@@ -111,10 +114,11 @@
             else {
                 //DONE - TODO:: REPLACE [chicagoStartups.reverse()] WITH A FUNCTION CALLED "chicagoStartupsReverse" - DONE
                 chicagoStartupsReverse().forEach( function(startup) {
-                    var childDiv = document.createElement('div');
+                    var childDiv = document.createElement(elementType);  // Determined by horizontal or vertical mode
                     var text = document.createTextNode(startup);
                     childDiv.appendChild(text);
                     reverseContainer.appendChild(childDiv);
+                    toggleDisplayClicked = 'false';
                 });
             }
         }
@@ -168,18 +172,37 @@
         var btnText = document.createTextNode('Reverse');
         reverseBtn.onclick = renderReversedElements;
         reverseBtn.appendChild(btnText);
+        var toggleDisplayBtn = document.createElement('button');
+        btnText = document.createTextNode('Toggle Display');
+        toggleDisplayBtn.onclick = toggleDisplay;
+        toggleDisplayBtn.appendChild(btnText);
         var reverseButtonContainer = document.createElement('div');
+        reverseButtonContainer.appendChild(toggleDisplayBtn);
         reverseButtonContainer.appendChild(reverseBtn);    
         document.getElementById('rootContainer').appendChild(reverseButtonContainer);
         document.getElementById('rootContainer').appendChild(reverseContainer);
     }
 
     function toggleDisplay() {
+        if (elementType == 'div') {  // what mode are we in?
+            elementType = 'span'; // switches to horizontal mode
+            spacer = ' - ' // puts a space/dash/space between each company - Couldn't use in time
+
+        } else {
+            elementType = 'div';  // switches to vertical mode
+            spacer = '';  // couldn't use in time
+        }
+        toggleDisplayClicked = 'true';
+        renderReversedElements();
         /*
-        TODO: REVIEW THE CODE IN THE PROVIDED REVERSE EXAMPLE, USE JAVASCRIPT TO ADD A CLICKABLE BUTTON 
+        Left to do but no time - I waited to the last minute to begin (family reasons):
+        1. Toggle Display also reverses but it shouldn't 
+        2. When in horizontal display there are no spaces between companies
+
+        MOSTLY DONE - TODO: REVIEW THE CODE IN THE PROVIDED REVERSE EXAMPLE, USE JAVASCRIPT TO ADD A CLICKABLE BUTTON 
         CALLED "Toggle Display" ... WHEN THE USER CLICKS THE BUTTON, IT RENDERS THE DISPLAY OF THE COMPANY NAMES 
         FROM VERTICAL, TO HORIZONTAL.
-        IF THE USER CLICKS THE TOGGLE BUTTON AGAIN THE NAMES SHOULD ONCE AGAIN BE DISPLAYED VERTICALLY.
+        IF THE USER CLICKS THE TOGGLE BUTTON AGAIN THE NAMES SHOULD ONCE AGAIN BE DISPLAYED VERTICALLY. - MOSTLY DONE
 
         TIPS: 
             1.  MAKE SURE TO READ AND UNDERSTAND THE DIFFERENCE BETWEEN BLOCK ELEMENTS SUCH AS A DIV, 
