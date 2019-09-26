@@ -143,10 +143,20 @@
 
     function cleanAndCountCharacters() {
         console.log('CLEAN AND COUNT CHARACTERS');
+
+        chicagoStartups.forEach( function(chicagoStartup, index) {
+            var newEntry;
+            newEntry = chicagoStartup.replace(/[^a-zA-Z0-9 ]/g, ""); // Leaves only letters, spaces, and numbers
+            newEntry = newEntry.trim();  // Trims trailing and leading spaces
+            newEntry = newEntry.replace(/\s+/g, ' '); // Removes excess spaces in the middle of a string
+            newEntry = newEntry + newEntry.length; // appends the length at the end of the company name (this counts the individual spaces between words)
+            chicagoStartups[index] = newEntry; // Replace entry with cleaned and counted entry
+        });
+       
         /*
-            TODO: REMOVES ANY SPECIAL CHARACTERS FROM EACH COMPANY NAME AND
+            DONE - TODO: REMOVES ANY SPECIAL CHARACTERS FROM EACH COMPANY NAME AND
               DISPLAYS THE NUMBER OF REMAINING CHARACTERS NEXT TO THE FULL WORD.
-              DONT FORGET TO REMOVE LEADING AND TRAILING WHITESPACES AS WELL
+              DONT FORGET TO REMOVE LEADING AND TRAILING WHITESPACES AS WELL - DONE
         */
 
     }
@@ -182,6 +192,7 @@
     }
     
     function run() {
+        cleanAndCountCharacters(); // Added here to do clean up before initial list is shown
         initDocument();
         initReverse();
     }
